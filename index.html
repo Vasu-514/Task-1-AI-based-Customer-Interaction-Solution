@@ -1,0 +1,55 @@
+<div class="chatbox">
+  <h3>🤖 Iron Lady AI Assistant</h3>
+  <div class="messages" id="messages">
+    <div class="bot">Hi! I’m Iron Lady AI Assistant. Are you a new learner or an existing student?</div>
+  </div>
+  <input type="text" id="userInput" placeholder="Type your message..." />
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+  function sendMessage() {
+    const input = document.getElementById("userInput");
+    const message = input.value.trim();
+    if (!message) return;
+
+    addMessage(message, "user");
+    input.value = "";
+
+    setTimeout(() => {
+      const response = getBotResponse(message.toLowerCase());
+      addMessage(response, "bot");
+    }, 500);
+  }
+
+  function addMessage(text, sender) {
+    const messagesDiv = document.getElementById("messages");
+    const div = document.createElement("div");
+    div.className = sender;
+    div.innerText = text;
+    messagesDiv.appendChild(div);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  function getBotResponse(msg) {
+    if (msg.includes("beginner")) {
+      return "For beginners, I recommend Iron Lady’s Foundation Program. It covers basics, hands-on skills, and career guidance.";
+    }
+    if (msg.includes("program")) {
+      return "Iron Lady offers beginner, intermediate, and advanced programs focused on skill development and career growth.";
+    }
+    if (msg.includes("enroll") || msg.includes("join")) {
+      return "To enroll: 1) Choose a program 2) Register online 3) Start learning with mentor support.";
+    }
+    if (msg.includes("after")) {
+      return "After completing a module, revise concepts, complete assignments, and move to the next level.";
+    }
+    if (msg.includes("existing")) {
+      return "Welcome back! I can help you with learning guidance, next steps, or program details.";
+    }
+    return "I’m here to help you understand programs, enrollment, and your learning journey at Iron Lady.";
+  }
+</script>
+
+</body>
+</html>
